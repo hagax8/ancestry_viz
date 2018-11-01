@@ -16,7 +16,7 @@ The following python packages are required:
 * data: directory, contains csv data files 
 * data/dataframe_1000G_noadmixed.csv: csv file, 1000 Genomes project dataframe with corresponding t-SNE and GTM coordinates 
 
-## First step: download files
+## Download files 
 You can download files for ancestry classification using 1000 genomes Phase 3 data from [here](http://lovingscience.com/ancestries/downloads.html), which are already formatted for this software. In this tutorial, we will use the following files:
 - [recoded_1000G.noadmixed.mat](http://lovingscience.com/ancestries/downloads.html): 20 populations from 1000 Genomes Project (excluding MXL, ACB, ASW, ITU, STU, GIH)
 - [recoded_1000G.raw.noadmixed.lbls3_3](http://lovingscience.com/ancestries/downloads.html): the corresponding ancestry labels (GBR and CEU were merged to obtain one category for Northern/Western European ancestry)
@@ -25,9 +25,9 @@ You can download files for ancestry classification using 1000 genomes Phase 3 da
 
 You can find out how these files were created by [clicking here](https://github.com/hagax8/uGTM/wiki/Appendix:-Generate-ancestry-files).
 
-## Second step: visualization:
+## Build GTM and t-SNE maps 
 
-To build a map with parameters [k,m,l,s] = [16,4,0.1,0.3] and 10 principal components, run the following command:
+To build a GTM with parameters [k,m,l,s] = [16,4,0.1,0.3] and 10 principal components, run the following command:
 
 ```
 python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
@@ -52,7 +52,7 @@ python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
 
 Click here to access the t-SNE map: [1000G_t-SNE_20populations.html](http://www.lovingscience.com/ancestries/downloads/1000G_t-SNE_20populations.html)
 
-## Third step: evaluation of classification performances in a crossvalidation experiment, compare GTM and linear SVM:
+## Evaluation of classification performances in a crossvalidation experiment, compare GTM and linear SVM:
 ```
 python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
 --labels recoded_1000G.raw.noadmixed.lbls3_3 --labeltype discrete \
@@ -63,7 +63,7 @@ python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
 This will give you per-class reports. Default class priors are equiprobable (cf. --prior option), which is generally only OK if classes are balanced. For imbalanced classes, use "--prior estimated" option.
 
 
-## Fourth step: train on provided data and project a test set onto the map:
+## Train on provided data and project a test set onto the map:
 The great thing about generative topographic mapping (GTM) is that you can project external test sets on the map without having to re-train the map.
 The ugtm package also includes some nice functions for classification models and generates posterior probabilities for test set individuals (--test) to belong to a specific class, based on the class labels (--labels) of the training set (--data).
 
