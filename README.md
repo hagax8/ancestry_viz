@@ -18,11 +18,11 @@ The following python packages are required:
 * data/dataframe_1000G_noadmixed.csv: csv file, 1000 Genomes project dataframe with corresponding t-SNE and GTM coordinates 
 
 ## First step: download files
-You can download files for ancestry classification using 1000 genomes Phase 3 data from here (http://lovingscience.com/ancestries/), which are already formatted for this software. In this tutorial, we will use the following files:
-- recoded_1000G.noadmixed.mat: 20 populations from 1000 Genomes Project (excluding MXL, ACB, ASW, ITU, STU, GIH)
-- recoded_1000G.raw.noadmixed.lbls3_3: the corresponding ancestry labels (GBR and CEU were merged to obtain one category for Northern/Western European ancestry)
-- recoded_1000G.raw.noadmixed.lbls3: the corresponding ancestry labels (GBR and CEU were not merged)
-- recoded_1000G.raw.noadmixed.ids: the corresponding individual IDs
+You can download files for ancestry classification using 1000 genomes Phase 3 data from [here](http://lovingscience.com/ancestries/downloads.html), which are already formatted for this software. In this tutorial, we will use the following files:
+- [recoded_1000G.noadmixed.mat](http://lovingscience.com/ancestries/downloads.html): 20 populations from 1000 Genomes Project (excluding MXL, ACB, ASW, ITU, STU, GIH)
+- [recoded_1000G.raw.noadmixed.lbls3_3](http://lovingscience.com/ancestries/downloads.html): the corresponding ancestry labels (GBR and CEU were merged to obtain one category for Northern/Western European ancestry)
+- [recoded_1000G.raw.noadmixed.lbls3](http://lovingscience.com/ancestries/downloads.html): the corresponding ancestry labels (GBR and CEU were not merged)
+- [recoded_1000G.raw.noadmixed.ids](http://lovingscience.com/ancestries/downloads.html): the corresponding individual IDs
 
 You can find out how these files were created by [clicking here](https://github.com/hagax8/uGTM/wiki/Appendix:-Generate-ancestry-files).
 
@@ -67,17 +67,17 @@ The projection for MXL population (Mexicans) can be visualized here: [1000G_GTM_
 ## Addendum 1: map based on AFR superpopulation only 
 To only run the computation for African samples:
 * Download:
-- recoded_1000G.noadmixed.AFR.mat: African (AFR) populations from 1000 Genomes Project (excluding ACB, ASW, ITU, STU)
-- recoded_1000G.raw.noadmixed.AFR.lbls3: the corresponding ancestry labels
-- recoded_1000G.raw.noadmixed.AFR.ids: the corresponding individual IDs 
+  * [recoded_1000G.noadmixed.AFR.mat](http://lovingscience.com/ancestries/downloads.html): African (AFR) populations from 1000 Genomes Project (excluding ACB, ASW, ITU, STU)
+  * [recoded_1000G.raw.noadmixed.AFR.lbls3](http://lovingscience.com/ancestries/downloads.html): the corresponding ancestry labels
+  * [recoded_1000G.raw.noadmixed.AFR.ids](http://lovingscience.com/ancestries/downloads.html): the corresponding individual IDs 
 
 * Build GTM and t-SNE: 
 
-- GTM (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_GTM_20populations.AFR.html))
+  * GTM (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_GTM_20populations.AFR.html))
 ```
 python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_GTM_AFR --pca --n_components 10 --regularization 0.1 --rbf_width_factor 0.3 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
 ```
-- t-SNE (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_t-SNE_20populations.html)):
+  * t-SNE (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_t-SNE_20populations.html)):
 ```
 python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_t-SNE_AFR --pca --n_components 10 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
 ```
