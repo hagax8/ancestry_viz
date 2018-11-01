@@ -1,5 +1,5 @@
 # Ancestry clustering
-This tutorial explains how to cluster and classify genomes using 1000 Genomes data with GTM (our [ugtm](https://github.com/hagax8/ugtm) implementation) and t-SNE (sklearn implementation).
+This tutorial explains how to cluster and classify genomes using 1000 Genomes data with GTM (our [ugtm](https://github.com/hagax8/ugtm) implementation) and t-SNE (sklearn implementation). Data files used in the following tutorial can be downloaded from [https://lovingscience.com/ancestries](https://lovingscience.com/ancestries/downloads.html).
 
 ### Requirements
 The following python packages are required:
