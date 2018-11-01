@@ -1,5 +1,5 @@
 # Ancestry clustering
-This tutorial will show you how to do ancestry clustering based on 1000 Genomes data using GTM (our [ugtm](https://github.com/hagax8/ugtm) implementation) or t-SNE (sklearn implementation).
+This tutorial explains how to cluster and classify genomes using 1000 Genomes data with GTM (our [ugtm](https://github.com/hagax8/ugtm) implementation) and t-SNE (sklearn implementation).
 
 ### Requirements
 The following python packages are required:
@@ -60,11 +60,11 @@ python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
 --missing --missing_strategy median \
 --random_state 8 --crossvalidate
 ``` 
-This will give you per-class reports. Default class priors are equiprobable (cf. --prior option), which is generally only OK if classes are balanced. For imbalanced classes, use "--prior estimated" option.
+This will give us per-class reports. Default class priors are equiprobable (cf. --prior option), which is generally only OK if classes are balanced. For imbalanced classes, use "--prior estimated" option.
 
 
 ## Train on provided data and project a test set onto the map:
-The great thing about generative topographic mapping (GTM) is that you can project external test sets on the map without having to re-train the map.
+The great thing about generative topographic mapping (GTM) is that we can project external test sets on the map without having to re-train the map.
 The ugtm package also includes some nice functions for classification models and generates posterior probabilities for test set individuals (--test) to belong to a specific class, based on the class labels (--labels) of the training set (--data).
 
 ```
@@ -75,7 +75,7 @@ python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
 --random_state 8 
 ```
 
-This will give you:
+This will give us:
 * predictions for individuals (output_indiv_predictions.csv)
 * posterior probabilities for each ancestry (output_indiv_probabilities.csv) 
 * posterior probabilities for the whole test set (output_group_probabilities.csv)
