@@ -120,7 +120,7 @@ python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat \
 ```
 
 ## Addendum 2: Arabidopsis Thaliana geographic visualization
-Cf. github repository https://github/hagax8/arabidopsis_viz 
+Cf. github repository [https://github.com/hagax8/arabidopsis_viz](https://github.com/hagax8/arabidopsis_viz)
 
 
 
