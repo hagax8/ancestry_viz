@@ -1,6 +1,5 @@
 # Ancestry clustering
-This tutorial will show you how to do ancestry clustering using GTM (our [ugtm](https://github.com/hagax8/ugtm) implementation) or t-SNE (sklearn implementation).
-
+This tutorial will show you how to do ancestry clustering based on 1000 Genomes data using GTM (our [ugtm](https://github.com/hagax8/ugtm) implementation) or t-SNE (sklearn implementation).
 
 ### Requirements
 The following python packages are required:
@@ -52,6 +51,9 @@ This will give you per-class reports. Default class priors are equiprobable (cf.
 
 
 ## Fourth step: train on provided data and project a test set onto the map:
+The great thing about generative topographic mapping (GTM) is that you can project external test sets on the map without having to re-train the map.
+The ugtm package also includes some nice functions for classification models and generates posterior probabilities for test set individuals (--test) to belong to a specific class, based on the class labels (--labels) of the training set (--data).
+
 ```
 python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat --test recoded_1000G_MXL.mat --labels recoded_1000G.raw.noadmixed.lbls3_3 --labeltype discrete --out outputname --pca --n_components 10 --missing --missing_strategy median --random_state 8 
 ```
@@ -65,22 +67,22 @@ This will give you:
 The projection for MXL population (Mexicans) can be visualized here: [1000G_GTM_projection_MXL.html](http://www.lovingscience.com/ancestries/downloads/1000G_GTM_projection_MXL.html)
 
 ## Addendum 1: map based on AFR superpopulation only 
-To only run the computation for African samples:
+To construct t-SNE and GTM maps based on AFR populations:
 * Download:
-  * [recoded_1000G.noadmixed.AFR.mat](http://lovingscience.com/ancestries/downloads.html): African (AFR) populations from 1000 Genomes Project (excluding ACB, ASW, ITU, STU)
+  * [recoded_1000G.noadmixed.AFR.mat](http://lovingscience.com/ancestries/downloads.html): African (AFR) populations from 1000 Genomes Project (excluding ACB and ASW)
   * [recoded_1000G.raw.noadmixed.AFR.lbls3](http://lovingscience.com/ancestries/downloads.html): the corresponding ancestry labels
   * [recoded_1000G.raw.noadmixed.AFR.ids](http://lovingscience.com/ancestries/downloads.html): the corresponding individual IDs 
 
 * Build GTM and t-SNE: 
 
   * GTM (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_GTM_20populations.AFR.html))
-```
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_GTM_AFR --pca --n_components 10 --regularization 0.1 --rbf_width_factor 0.3 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
-```
+  ```
+  python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_GTM_AFR --pca --n_components 10 --regularization 0.1 --rbf_width_factor 0.3 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
+  ```
   * t-SNE (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_t-SNE_20populations.html)):
-```
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_t-SNE_AFR --pca --n_components 10 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
-```
+  ```
+  python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_t-SNE_AFR --pca --n_components 10 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
+  ```
 
 * African subpopulations classification performance:
 ```
