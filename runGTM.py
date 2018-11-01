@@ -482,7 +482,7 @@ elif type_of_experiment == 'visualization':
         ugtm.plot(labels=labels, coordinates=data_r, discrete=discrete,
                   output=args.output, cname=args.cname,
                   pointsize=args.pointsize, alpha=args.alpha,
-                  output_format="png", title="")
+                  title="")
         np.savetxt(args.output+".csv", data_r, delimiter=',')
         exit
 
@@ -510,7 +510,7 @@ elif type_of_experiment == 'visualization':
                       prior=args.prior, do_interpolate=args.interpolate)
         gtm.plot(labels=labels, output=args.output, discrete=discrete,
                  pointsize=args.pointsize, alpha=args.alpha,
-                 cname=args.cname, output_format="png")
+                 cname=args.cname)
         exit
 
     # if it's for kGTM visualization
@@ -542,7 +542,7 @@ elif type_of_experiment == 'visualization':
                        title="")
         kgtm.plot(labels=labels, output=args.output, discrete=discrete,
                   pointsize=args.pointsize, alpha=args.alpha,
-                  cname=args.cname, output_format="png")
+                  cname=args.cname)
         exit
 
     # if it's to compare GTM, PCA, LLE and t_SNE visualizations

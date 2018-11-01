@@ -30,7 +30,11 @@ You can find out how these files were created by [clicking here](https://github.
 To build a map with parameters [k,m,l,s] = [16,4,0.1,0.3] and 10 principal components, run the following command:
 
 ```
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat --labels recoded_1000G.raw.noadmixed.lbls3 --labeltype discrete --out outputname --pca --n_components 10 --regularization 0.1 --rbf_width_factor 0.3 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.ids
+python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
+--labels recoded_1000G.raw.noadmixed.lbls3 --labeltype discrete \
+--out outputname --pca --n_components 10 --regularization 0.1 \
+--rbf_width_factor 0.3 --missing --missing_strategy median \
+--random_state 8 --ids recoded_1000G.raw.noadmixed.ids
 ```
 
 It should be noted that our genotype file has missing values that we are handling with the --missing and --missing strategy options. You should obtain a pdf and an html file. The html file looks like this:
@@ -39,15 +43,24 @@ It should be noted that our genotype file has missing values that we are handlin
 To build a t-SNE map, run: 
 
 ```
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat --labels recoded_1000G.raw.noadmixed.lbls3 --labeltype discrete --out outputname --pca --n_components 10 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.ids
+python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
+--labels recoded_1000G.raw.noadmixed.lbls3 --labeltype discrete \
+--out outputname --pca --n_components 10 \
+--missing --missing_strategy median \
+--random_state 8 --ids recoded_1000G.raw.noadmixed.ids
 ```
 
 Click here to access the t-SNE map: [1000G_t-SNE_20populations.html](http://www.lovingscience.com/ancestries/downloads/1000G_t-SNE_20populations.html)
 
 ## Third step: evaluation of classification performances in a crossvalidation experiment, compare GTM and linear SVM:
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat --labels recoded_1000G.raw.noadmixed.lbls3_3 --labeltype discrete --out outputname --pca --n_components 10 --missing --missing_strategy median --random_state 8 --crossvalidate
-
-This will give you per-class reports. Default class priors are equiprobable (cf. --prior option).
+```
+python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
+--labels recoded_1000G.raw.noadmixed.lbls3_3 --labeltype discrete \
+--out outputname --pca --n_components 10 \
+--missing --missing_strategy median \
+--random_state 8 --crossvalidate
+``` 
+This will give you per-class reports. Default class priors are equiprobable (cf. --prior option), which is generally only OK if classes are balanced. For imbalanced classes, use "--prior estimated" option.
 
 
 ## Fourth step: train on provided data and project a test set onto the map:
@@ -55,7 +68,11 @@ The great thing about generative topographic mapping (GTM) is that you can proje
 The ugtm package also includes some nice functions for classification models and generates posterior probabilities for test set individuals (--test) to belong to a specific class, based on the class labels (--labels) of the training set (--data).
 
 ```
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat --test recoded_1000G_MXL.mat --labels recoded_1000G.raw.noadmixed.lbls3_3 --labeltype discrete --out outputname --pca --n_components 10 --missing --missing_strategy median --random_state 8 
+python runGTM.py --model GTM --data recoded_1000G.noadmixed.mat \
+--test recoded_1000G_MXL.mat --labels recoded_1000G.raw.noadmixed.lbls3_3 \
+--labeltype discrete --out outputname --pca --n_components 10 \
+--missing --missing_strategy median \
+--random_state 8 
 ```
 
 This will give you:
@@ -77,16 +94,29 @@ To construct t-SNE and GTM maps based on AFR populations:
 
   * GTM (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_GTM_20populations.AFR.html))
   ```
-  python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_GTM_AFR --pca --n_components 10 --regularization 0.1 --rbf_width_factor 0.3 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
+  python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat \
+  --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete \
+  --out 1000G_GTM_AFR --pca --n_components 10 \
+  --regularization 0.1 --rbf_width_factor 0.3 \
+  --missing --missing_strategy median \
+  --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
   ```
   * t-SNE (cf. [output](http://www.lovingscience.com/ancestries/downloads/1000G_t-SNE_20populations.html)):
   ```
-  python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out 1000G_t-SNE_AFR --pca --n_components 10 --missing --missing_strategy median --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
+  python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat \
+  --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete \
+  --out 1000G_t-SNE_AFR --pca --n_components 10 \
+  --missing --missing_strategy median \
+  --random_state 8 --ids recoded_1000G.raw.noadmixed.AFR.ids
   ```
 
 * African subpopulations classification performance:
 ```
-python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat --labels recoded_1000G.raw.noadmixed.AFR.lbls3 --labeltype discrete --out outputname --pca --n_components 10 --missing --missing_strategy median --random_state 8 --crossvalidate
+python runGTM.py --model GTM --data recoded_1000G.noadmixed.AFR.mat \
+--labels recoded_1000G.raw.noadmixed.AFR.lbls3 \
+--labeltype discrete --out outputname --pca --n_components 10 \
+--missing --missing_strategy median \
+--random_state 8 --crossvalidate
 ```
 
 ## Addendum 2: Arabidopsis Thaliana geographic visualization
